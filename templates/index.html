@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <!-- Hero Section with Background -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to HealthCare Hospital</h1>
+            <p>Your Health, Our Priority</p>
+            <p class="subtitle">Manage appointments, access medical records, and connect with healthcare professionals</p>
+            <div class="hero-buttons">
+                <a href="{{ url_for('login') }}" class="btn-primary">Login</a>
+                <a href="{{ url_for('register') }}" class="btn-secondary">Register</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

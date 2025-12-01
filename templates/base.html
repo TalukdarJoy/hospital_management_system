@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>🏥 HealthCare Hospital</h1>
+            </div>
+            {% if not session.get('existing_user') %}
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('login') }}" class="btn-header">Login</a>
+                <a href="{{ url_for('register') }}" class="btn-header">Register</a>
+            {% elif session.get('existing_user') and session.get('role') == 'patient'%}
+            <nav>
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('logout') }}" class="btn-header">Logout</a>
+                <a href="{{ url_for('register') }}" class="btn-header">History</a>
+            </nav>
+            {% elif session.get('existing_user') and session.get('role') == 'admin'%}
+                <a href="{{ url_for('logout') }}" class="btn-header">Logout</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Main Content (will be filled by other pages) -->
+    <main>
+        {% block content %}
+        <!-- Content goes here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthCare Hospital Management System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

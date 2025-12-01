@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">MediCare System - Doctor</span>
+        <div class="top-links">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="doctor-container">
+        <h1 class="doctor-title">Doctors' Dashboard</h1>
+
+        <!-- Welcome Section -->
+        <div class="doctor-header">
+            <span class="doctor-welcome">Welcome Dr. {{ doctor.name }}</span>
+            <a href="{{ url_for('logout') }}" class="logout-link">logout</a>
+        </div>
+
+        <!-- Upcoming Appointments -->
+        <div class="doctor-section">
+            <h2>Upcoming Appointments</h2>
+            <table class="doctor-table">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Patient Name</th>
+                        <th>Patient History</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.id }}</td>
+                        <td>{{ appointment.patient.name }}</td>
+                        <td>
+                            <button class="btn-history" onclick="window.location.href='{{ url_for('patient_history', patient_id=appointment.patient.id) }}'">view history</button>
+                        </td>
+                        <td>
+                            <button class="btn-update" onclick="window.location.href='{{ url_for('update_patient', appointment_id=appointment.id) }}'">update</button>
+                            <button class="btn-complete">mark as complete</button>
+                            <button class="btn-cancel">cancel</button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No upcoming appointments</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Assigned Patients -->
+        <div class="doctor-section">
+            <h2>Assigned Patients</h2>
+            <div class="patient-list">
+                {% for patient in patients %}
+                <div class="patient-item">
+                    <span>{{ patient.name }}</span>
+                    <button class="btn-view" onclick="window.location.href='{{ url_for('patient_history', patient_id=patient.id) }}'">view</button>
+                </div>
+                {% else %}
+                <div class="patient-item">
+                    <span>No patients assigned</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Provide Availability Button -->
+        <div class="availability-section">
+            <button class="btn-availability" onclick="window.location.href='{{ url_for('doc_availability') }}'">Provide Availability</button>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <p>MediCare Hospital System 2025</p>
+    </div>
+</body>
+</html>

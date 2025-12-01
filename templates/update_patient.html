@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Update Patient History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">MediCare System - Doctor</span>
+        <div class="top-links">
+            <a href="{{ url_for('doctor_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="update-container">
+        <h1>Update Patient History</h1>
+        <div class="patient-info">
+            <p><strong>Patient Name:</strong> {{ appointment.patient.name }}</p>
+            <p><strong>Department:</strong> {{ doctor.specialization }}</p>
+        </div>
+
+        <div class="update-form-box">
+            <form method="POST" action="{{ url_for('update_patient', appointment_id=appointment.id) }}">
+                <div class="update-row">
+                    <div class="update-field">
+                        <label>Visit Type</label>
+                        <input type="text" name="visit_type" placeholder="In-person, Online, etc." required>
+                    </div>
+                    <div class="update-field">
+                        <label>Test Done</label>
+                        <input type="text" name="test_done" placeholder="ECG, X-Ray, etc.">
+                    </div>
+                </div>
+
+                <div class="update-field-full">
+                    <label>Diagnosis</label>
+                    <input type="text" name="diagnosis" placeholder="Enter diagnosis" required>
+                </div>
+
+                <div class="update-row">
+                    <div class="update-field">
+                        <label>Prescription</label>
+                        <textarea name="prescription" rows="3" placeholder="Enter prescription"></textarea>
+                    </div>
+                    <div class="update-field">
+                        <label>Medicines</label>
+                        <textarea name="medicines" rows="3" placeholder="Medicine 1  1-0-1&#10;Medicine 2  0-1-1&#10;Medicine 3  1-0-0"></textarea>
+                    </div>
+                </div>
+
+                <p class="form-note">Students can add/remove fields based on what they want to store as patient's history</p>
+
+                <div class="update-actions">
+                    <button type="submit" class="btn-save">save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <p>MediCare Hospital System 2025</p>
+    </div>
+</body>
+</html>

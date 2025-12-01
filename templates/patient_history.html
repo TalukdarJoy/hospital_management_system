@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Patient History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">MediCare System - Doctor</span>
+        <div class="top-links">
+            <a href="{{ url_for('doctor_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="history-container">
+        <div class="history-header">
+            <h1>Patient History</h1>
+            <button class="btn-back" onclick="window.location.href='{{ url_for('doctor_dashboard') }}'">back</button>
+        </div>
+
+        <div class="history-info">
+            <p><strong>Patient Name:</strong> {{ patient.name }}</p>
+            <p><strong>Doctor's Name:</strong> Dr. {{ doctor.name }}</p>
+            <p><strong>Department:</strong> {{ doctor.specialization }}</p>
+        </div>
+
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Visit No.</th>
+                    <th>Visit Type</th>
+                    <th>Tests Done</th>
+                    <th>Diagnosis</th>
+                    <th>Prescription</th>
+                    <th>Medicines</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treatment in treatments %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ treatment.visit_type or 'In-person' }}</td>
+                    <td>{{ treatment.test_done or 'ECG' }}</td>
+                    <td>{{ treatment.diagnosis }}</td>
+                    <td>{{ treatment.prescription }}</td>
+                    <td>{{ treatment.medicines or 'Medicine 1' }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No treatment history available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="bottom-bar">
+        <p>MediCare Hospital System 2025</p>
+    </div>
+</body>
+</html>
