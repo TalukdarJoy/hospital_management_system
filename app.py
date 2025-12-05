@@ -604,12 +604,12 @@ def createdoc():
         return redirect(url_for('admin_dashboard'))
     return render_template('createdoc.html') 
 
-from flask import flash  # if you want to use flash messages
+from flask import flash  
 
 @app.route('/delete_doctor/<int:doctor_id>')
 def delete_doctor(doctor_id):
     doctor = Doctor.query.get_or_404(doctor_id)
-    # optionally get linked user and delete it too
+    # get linked user and delete it too
     user = User.query.get(doctor.user_id)
 
     db.session.delete(doctor)
@@ -637,7 +637,7 @@ if __name__ == '__main__':
             admin_user = User(
                 username='admin',
                 email='admin@hospital.com',
-                password='admin123',  # Change this in production!
+                password='admin123',  
                 role='admin'
             )
             db.session.add(admin_user)
