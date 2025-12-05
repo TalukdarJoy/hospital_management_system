@@ -119,7 +119,7 @@ def register():
   
     return render_template('register.html') 
     
-    
+
 @app.route('/login', methods=["POST","GET"])
 def login():
     
@@ -145,6 +145,8 @@ def login():
             return "Invalid credentials! <a href='/login'>Try again</a>"
     
     return render_template('login.html')
+
+    
     '''
     if request.method == "POST":
         username  = request.form["username"]
