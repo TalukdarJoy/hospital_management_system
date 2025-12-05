@@ -1,6 +1,19 @@
-{% extends "base.html" %}
-{% block title %}Home Page{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <body class="register-doctor-page">
+    <div class="top-bar">
+        <span class="hospital-title">Admin Panel</span>
+        <div class="top-links">
+            <a href="{{ url_for('admin_dashboard') }}">Home</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div> 
 <div class="admin-container">
         <!-- Back Link -->
         <a href="{{ url_for('admin_dashboard') }}" class="back-link">&laquo; Back</a>
@@ -27,4 +40,9 @@
             </form>
         </div>
     </div>
-{% endblock %}
+ <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LifeLine Hospital Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

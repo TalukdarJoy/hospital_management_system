@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Availability</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">LifeLine System - Patient</span>
+        <div class="top-links">
+            <a href="{{ url_for('patient_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="availability-view-container">
+        <div class="availability-view-header">
+            <h1>Doctor's Availability</h1>
+            <button class="btn-back" onclick="window.location.href='{{ url_for('patient_dashboard') }}'">back</button>
+        </div>
+
+        <div class="doctor-info-banner">
+            <h2>Dr. {{ doctor.name }}</h2>
+            <p>{{ doctor.specialization }}</p>
+        </div>
+
+        {% if availability_list %}
+        <div class="availability-display">
+            <p class="booking-instruction">Click on an available slot to book your appointment</p>
+            <table class="availability-view-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Morning Slot</th>
+                        <th>Evening Slot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for slot in availability_list %}
+                    <tr>
+                        <td class="date-column">{{ slot.date }}</td>
+                        <td>
+                            {% if slot.morning %}
+                                {% if slot.morning_booked %}
+                                    <button class="slot-btn slot-booked" disabled>
+                                        {{ slot.morning }} <br><small>(Already Booked)</small>
+                                    </button>
+                                {% else %}
+                                    <form method="POST" action="{{ url_for('book_appointment') }}" style="display: inline;">
+                                        <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+                                        <input type="hidden" name="date" value="{{ slot.date }}">
+                                        <input type="hidden" name="slot" value="morning">
+                                        <button type="submit" class="slot-btn slot-available slot-morning">
+                                            {{ slot.morning }}<br><small>Available</small>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                <span class="slot-not-set">Not Available</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if slot.evening %}
+                                {% if slot.evening_booked %}
+                                    <button class="slot-btn slot-booked" disabled>
+                                        {{ slot.evening }} <br><small>(Already Booked)</small>
+                                    </button>
+                                {% else %}
+                                    <form method="POST" action="{{ url_for('book_appointment') }}" style="display: inline;">
+                                        <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+                                        <input type="hidden" name="date" value="{{ slot.date }}">
+                                        <input type="hidden" name="slot" value="evening">
+                                        <button type="submit" class="slot-btn slot-available slot-evening">
+                                            {{ slot.evening }}<br><small>Available</small>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                <span class="slot-not-set">Not Available</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="no-availability">
+            <p>Doctor has not set availability yet. Please check back later.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="bottom-bar">
+        <p>LifeLine Hospital System 2025</p>
+    </div>
+</body>
+</html>

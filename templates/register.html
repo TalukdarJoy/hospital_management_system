@@ -1,6 +1,24 @@
-{% extends "base.html" %}
-{% block title %}Register Page{% endblock %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LifeLine System</h1>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('login') }}" class="btn-header">Login</a>
+                <a href="{{ url_for('register') }}" class="btn-header">Register</a>
+            </nav>
+        </div>
+    </header>
 
     <div class="page-wrapper">
         <div class="input-card">
@@ -18,4 +36,9 @@
         </div>
     </div>
 
-{% endblock %}
+ <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 LifeLine Hospital Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

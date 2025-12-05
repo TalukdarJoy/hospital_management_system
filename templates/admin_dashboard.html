@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="top-bar">
-        <span class="hospital-title">MediCare System - Admin</span>
+        <span class="hospital-title">LifeLine System - Admin</span>
         <div class="top-links">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -37,11 +37,11 @@
                 <div class="list-item">
                     <span class="item-name">Dr. {{ doctor.name }}</span>
                     <div class="item-actions">
-                        <button class="btn-action btn-edit">edit</button>
+                        
                         <a href="{{ url_for('delete_doctor', doctor_id=doctor.id) }}" class="btn-action btn-delete">
                             delete
                         </a>
-                        <button class="btn-action btn-blacklist">blacklist</button>
+                        
                     </div>
                 </div>
                 {% else %}
@@ -61,11 +61,7 @@
                 {% for patient in patients %}
                 <div class="list-item">
                     <span class="item-name">{{ patient.name }}</span>
-                    <div class="item-actions">
-                        <button class="btn-action btn-edit">edit</button>
-                        <button class="btn-action btn-delete">delete</button>
-                        <button class="btn-action btn-blacklist">blacklist</button>
-                    </div>
+                    
                 </div>
                 {% else %}
                 <div class="list-item">
@@ -112,7 +108,7 @@
     </div>
 
     <div class="bottom-bar">
-        <p>MediCare Hospital System 2025</p>
+        <p>LifeLine Hospital System 2025</p>
     </div>
 </body>
 </html>

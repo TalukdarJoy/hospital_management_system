@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="top-bar">
-        <span class="hospital-title">MediCare System - Doctor</span>
+        <span class="hospital-title">LifeLine System - Doctor</span>
         <div class="top-links">
             <a href="{{ url_for('doctor_dashboard') }}">Dashboard</a>
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -16,21 +16,39 @@
 
     <div class="availability-container">
         <h1>Doctor's Availability</h1>
-        <p class="availability-note">7 days availability to be provided</p>
+        <p class="availability-note">Set your availability for the next 7 days</p>
 
-        <form method="POST" action="{{ url_for('save_availability') }}">
+        <form method="POST" action="{{ url_for('doc_availability') }}">
             <table class="availability-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Morning Slot</th>
+                        <th>Evening Slot</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {% for i in range(7) %}
                     <tr>
                         <td class="date-cell">
-                            <input type="date" name="date_{{ i }}" value="{{ dates[i] if dates else '' }}" required>
+                            <input type="date" name="date_{{ i }}" value="{{ dates[i] }}" readonly>
                         </td>
                         <td>
-                            <input type="text" name="slot1_{{ i }}" placeholder="08:00 - 12:00 am" class="slot-input slot-morning">
+                            <select name="slot1_{{ i }}" class="slot-select slot-morning">
+                                <option value="">Not Available</option>
+                                <option value="08:00 - 10:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].morning == "08:00 - 10:00" %}selected{% endif %}>08:00 - 10:00 AM</option>
+                                <option value="10:00 - 12:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].morning == "10:00 - 12:00" %}selected{% endif %}>10:00 - 12:00 PM</option>
+                                <option value="08:00 - 12:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].morning == "08:00 - 12:00" %}selected{% endif %}>08:00 - 12:00 PM</option>
+                            </select>
                         </td>
                         <td>
-                            <input type="text" name="slot2_{{ i }}" placeholder="04:00 - 9:00 pm" class="slot-input slot-evening">
+                            <select name="slot2_{{ i }}" class="slot-select slot-evening">
+                                <option value="">Not Available</option>
+                                <option value="14:00 - 16:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].evening == "14:00 - 16:00" %}selected{% endif %}>02:00 - 04:00 PM</option>
+                                <option value="16:00 - 18:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].evening == "16:00 - 18:00" %}selected{% endif %}>04:00 - 06:00 PM</option>
+                                <option value="18:00 - 20:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].evening == "18:00 - 20:00" %}selected{% endif %}>06:00 - 08:00 PM</option>
+                                <option value="14:00 - 20:00" {% if existing_map.get(dates[i]) and existing_map[dates[i]].evening == "14:00 - 20:00" %}selected{% endif %}>02:00 - 08:00 PM</option>
+                            </select>
                         </td>
                     </tr>
                     {% endfor %}
@@ -38,13 +56,13 @@
             </table>
 
             <div class="availability-actions">
-                <button type="submit" class="btn-save-availability">save</button>
+                <button type="submit" class="btn-save-availability">Save Availability</button>
             </div>
         </form>
     </div>
 
     <div class="bottom-bar">
-        <p>MediCare Hospital System 2025</p>
+        <p>LifeLine Hospital System 2025</p>
     </div>
 </body>
 </html>

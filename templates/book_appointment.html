@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">LifeLine System - Patient</span>
+        <div class="top-links">
+            <a href="{{ url_for('patient_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="booking-container">
+        <h1>Book Appointment</h1>
+        
+        <div class="booking-doctor-info">
+            <p><strong>Doctor:</strong> Dr. {{ doctor.name }}</p>
+            <p><strong>Department:</strong> {{ doctor.specialization }}</p>
+        </div>
+
+        <div class="booking-form-box">
+            <form method="POST" action="{{ url_for('book_appointment', doctor_id=doctor.id) }}">
+                <div class="form-field">
+                    <label>Appointment Date</label>
+                    <input type="date" name="appointment_date" required>
+                </div>
+
+                <div class="form-field">
+                    <label>Appointment Time</label>
+                    <input type="time" name="appointment_time" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-book-submit">Book Appointment</button>
+                    <a href="{{ url_for('patient_dashboard') }}" class="btn-book-cancel">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <p>LifeLine Hospital System 2025</p>
+    </div>
+</body>
+</html>

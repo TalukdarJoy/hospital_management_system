@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="top-bar">
-        <span class="hospital-title">MediCare System - Doctor</span>
+        <span class="hospital-title">LifeLine System - Doctor</span>
         <div class="top-links">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -43,10 +43,11 @@
                         <td>
                             <button class="btn-history" onclick="window.location.href='{{ url_for('patient_history', patient_id=appointment.patient.id) }}'">view history</button>
                         </td>
+                        <!-- In the Upcoming Appointments table -->
                         <td>
-                            <button class="btn-update" onclick="window.location.href='{{ url_for('update_patient', appointment_id=appointment.id) }}'">update</button>
-                            <button class="btn-complete">mark as complete</button>
-                            <button class="btn-cancel">cancel</button>
+                            <button class="btn-update" onclick="window.location.href='{{ url_for('update_patient', appointment_id=appointment.id) }}'">Treat</button>
+                            <button class="btn-complete" onclick="window.location.href='{{ url_for('mark_complete', appointment_id=appointment.id) }}'">mark as complete</button>
+                            <button class="btn-cancel" onclick="window.location.href='{{ url_for('cancel_appointment', appointment_id=appointment.id) }}'">cancel</button>
                         </td>
                     </tr>
                     {% else %}
@@ -82,7 +83,7 @@
     </div>
 
     <div class="bottom-bar">
-        <p>MediCare Hospital System 2025</p>
+        <p>LifeLine Hospital System 2025</p>
     </div>
 </body>
 </html>

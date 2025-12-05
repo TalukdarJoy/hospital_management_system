@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="top-bar">
-        <span class="hospital-title">MediCare System - Doctor</span>
+        <span class="hospital-title">LifeLine System - Doctor</span>
         <div class="top-links">
             <a href="{{ url_for('doctor_dashboard') }}">Dashboard</a>
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -44,7 +44,7 @@
                     <td>{{ treatment.visit_type or 'In-person' }}</td>
                     <td>{{ treatment.test_done or 'ECG' }}</td>
                     <td>{{ treatment.diagnosis }}</td>
-                    <td>{{ treatment.prescription }}</td>
+                    <td>{{ treatment.prescription or 'Prescribed' }}</td>
                     <td>{{ treatment.medicines or 'Medicine 1' }}</td>
                 </tr>
                 {% else %}
@@ -57,7 +57,7 @@
     </div>
 
     <div class="bottom-bar">
-        <p>MediCare Hospital System 2025</p>
+        <p>LifeLine Hospital System 2025</p>
     </div>
 </body>
 </html>

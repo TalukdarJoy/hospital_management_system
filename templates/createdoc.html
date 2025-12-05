@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <body class="register-doctor-page">
     <div class="top-bar">
         <span class="hospital-title">Admin Panel</span>
         <div class="top-links">
@@ -15,7 +16,8 @@
     </div>
 
     <div class="admin-container">
-        <a href="/admin_dashboard/createdoc" class="back-link">&laquo; Back</a>
+        
+        
         <h2 class="admin-title">Register New Doctor</h2>
 
         <div class="doctor-form-wrapper">
@@ -30,9 +32,9 @@
                     <label>Department</label>
                     <select name="specialization" class="form-control" required>
                         <option value="" disabled selected>Select Department</option>
-                        <option value="1">Cardiology (1)</option>
-                        <option value="2">Neurology (2)</option>
-                        <option value="3">Orthopedics (3)</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Orthopedics">Orthopedics</option>
                     </select>
                 </div>
 
@@ -42,8 +44,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Availability</label>
-                    <input type="text" name="availability" class="form-control">
+                    <label>Year's Of Experience</label>
+                    <input type="text" name="experience" class="form-control">
                 </div>
 
                 <br>
@@ -57,7 +59,7 @@
     </div>
 
     <div class="bottom-bar">
-        <p>&copy; 2025 MediCare System</p>
+        <p>&copy; 2025 LifeLine System</p>
     </div>
 </body>
 </html>

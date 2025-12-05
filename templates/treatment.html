@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Treatment Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <span class="hospital-title">LifeLine System - Patient</span>
+        <div class="top-links">
+            <a href="{{ url_for('patient_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="treatment-container">
+        <div class="treatment-header">
+            <h1>Treatment Details</h1>
+            <button class="btn-back" onclick="window.location.href='{{ url_for('patient_dashboard') }}'">back</button>
+        </div>
+
+        <div class="treatment-content">
+            <!-- Left Side - Doctor Info -->
+            <div class="treatment-doctor-info">
+                <h2>Doctor Information</h2>
+                <div class="info-box">
+                    <p><strong>Doctor Name:</strong> Dr. {{ appointment.doctor.name }}</p>
+                    <p><strong>Department:</strong> {{ appointment.doctor.specialization }}</p>
+                    <p><strong>Appointment Date:</strong> {{ appointment.appointment_date }}</p>
+                    <p><strong>Appointment Time:</strong> <p><strong>Appointment Time:</strong> {{ appointment.appointment_time }}</p></td></p>
+                    <p><strong>Status:</strong> 
+                        <span class="status-badge status-{{ appointment.status.lower() }}">
+                            {{ appointment.status }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Side - Treatment Details -->
+            <div class="treatment-details">
+                <h2>Treatment Details</h2>
+                {% if treatment %}
+                <div class="info-box">
+                    <div class="treatment-field">
+                        <label>Visit Type:</label>
+                        <p>{{ treatment.visit_type or 'In-person' }}</p>
+                    </div>
+                    <div class="treatment-field">
+                        <label>Tests Done:</label>
+                        <p>{{ treatment.test_done or 'N/A' }}</p>
+                    </div>
+                    <div class="treatment-field">
+                        <label>Diagnosis:</label>
+                        <p>{{ treatment.diagnosis }}</p>
+                    </div>
+                    <div class="treatment-field">
+                        <label>Prescription:</label>
+                        <p>{{ treatment.prescription or 'N/A' }}</p>
+                    </div>
+                    <div class="treatment-field">
+                        <label>Medicines:</label>
+                        <p>{{ treatment.medicines or 'N/A' }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="info-box not-completed">
+                    <p class="not-completed-msg">Treatment not yet completed</p>
+                    <p>Your appointment is scheduled. The doctor will update treatment details after your visit.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <p>LifeLine Hospital System 2025</p>
+    </div>
+</body>
+</html>
