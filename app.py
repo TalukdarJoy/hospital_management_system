@@ -38,8 +38,8 @@ class Appointment(db.Model):
     patient_name=db.Column(db.String(100), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctors.id'), nullable=False)
     patient_id = db.Column(db.Integer, db.ForeignKey('patients.id'), nullable=False)
-    appointment_date = db.Column(db.String(20), nullable=False)   # 'YYYY-MM-DD'
-    appointment_time = db.Column(db.String(50), nullable=False)   # '08:00-12:00' or 'Morning: 08-12'
+    appointment_date = db.Column(db.String(20), nullable=False)   
+    appointment_time = db.Column(db.String(50), nullable=False)   
     status = db.Column(db.String(20), nullable=False, default='Booked')
     treatment = db.relationship('Treatment', backref='appointment', uselist=False)
 
