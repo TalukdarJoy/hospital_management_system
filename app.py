@@ -47,9 +47,9 @@ class DoctorAvailability(db.Model):
     __tablename__ = 'doctor_availabilities'
     id = db.Column(db.Integer, primary_key=True)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctors.id'), nullable=False)
-    date = db.Column(db.String(20), nullable=False)   # 'YYYY-MM-DD'
-    morning = db.Column(db.String(80), nullable=True) # text like '08:00 - 12:00'
-    evening = db.Column(db.String(80), nullable=True) # text like '16:00 - 20:00'
+    date = db.Column(db.String(20), nullable=False)   
+    morning = db.Column(db.String(80), nullable=True) 
+    evening = db.Column(db.String(80), nullable=True) 
 
     doctor = db.relationship('Doctor', backref='availabilities')
 
@@ -68,7 +68,7 @@ class Doctor(db.Model):
     name = db.Column(db.String(100), nullable=False)
     specialization = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(15), nullable=False)
-    availability = db.Column(db.String(100), nullable=True)  # e.g., 'Mon-Fri 9am-5pm'
+    availability = db.Column(db.String(100), nullable=True)  
     experience = db.Column(db.String(50), nullable=True)
 
     appointments = db.relationship('Appointment', backref='doctor', lazy=True)
@@ -105,7 +105,7 @@ def register():
 
         new_patient = Patient(
             user_id=new_user.id,
-            name=username,   # or request.form["name"] if you collect real name
+            name=username,   
             age=0,
             gender="Not set",
             phone="Not set",
@@ -180,7 +180,7 @@ def patient_dashboard():
 
     patient = Patient.query.filter_by(user_id=user_id).first()
 
-    # 🔥 Auto-create patient profile if missing
+    
     if not patient:
         user = User.query.get(user_id)
         patient = Patient(
@@ -194,7 +194,7 @@ def patient_dashboard():
         db.session.add(patient)
         db.session.commit()
 
-    # Fetch appointments (safe now because patient exists)
+    # Fetch appointments 
     appointments = Appointment.query.filter_by(patient_id=patient.id).order_by(
         Appointment.appointment_date.desc()
     ).all()
@@ -208,7 +208,7 @@ def patient_dashboard():
         doctors=doctors
     )
 
-# Update book_appointment route - simplified for POST only
+# Update book_appointment route
 @app.route('/book_appointment', methods=['POST'])
 def book_appointment():
     if 'user_id' not in session or session.get('role') != 'patient':
