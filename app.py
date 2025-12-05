@@ -222,7 +222,7 @@ def book_appointment():
 
     doctor_id = int(request.form.get('doctor_id'))
     date = request.form.get('date')
-    slot = request.form.get('slot')  # 'morning' or 'evening'
+    slot = request.form.get('slot')  # morning or evening
     
     # Get the availability
     avail = DoctorAvailability.query.filter_by(doctor_id=doctor_id, date=date).first()
@@ -341,7 +341,7 @@ def update_patient(appointment_id):
                          doctor=doctor)
 
 
-# Also update view_treatment route to parse prescription:
+#update view_treatment route to parse prescription:
 
 @app.route('/patient_history/<int:patient_id>')
 def patient_history(patient_id):
@@ -407,9 +407,7 @@ def doc_availability():
     dates = [(today + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(7)]
 
     if request.method == 'POST':
-        # Remove any existing availability rows for this doctor for the posted dates,
-        # then insert fresh rows.
-        # We'll collect posted slots and upsert into DoctorAvailability.
+        
         for i in range(7):
             d = request.form.get(f'date_{i}')
             morning = request.form.get(f'slot1_{i}', '').strip()
@@ -418,7 +416,7 @@ def doc_availability():
             if not d:
                 continue
 
-            # try find existing
+            #find existing
             existing = DoctorAvailability.query.filter_by(doctor_id=doctor.id, date=d).first()
             if existing:
                 existing.morning = morning or None
