@@ -84,6 +84,7 @@ class Patient(db.Model):
     address = db.Column(db.String(200), nullable=True)
 
     appointments = db.relationship('Appointment', backref='patient', lazy=True)
+    
 @app.route('/')
 def index():
     return render_template('index.html')
