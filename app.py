@@ -439,8 +439,8 @@ def doc_availability():
     return render_template('doc_availability.html', doctor=doctor, dates=dates, existing_map=existing_map)
 
 
-# Patient view of a specific doctor's availability (useable from patient dashboard)
-# Accepts doctor_id parameter
+# Patient view of a specific doctor's availability from patient dashboard
+# doctor_id parameter
 # Update view_doc_availability route
 
 @app.route('/treatment/<int:appointment_id>')
@@ -583,7 +583,7 @@ def createdoc():
             role="doctor"
         )
         db.session.add(new_user)
-        db.session.flush()   # <-- assigns new_user.id without committing
+        db.session.flush()   
 
         # now new_user.id is available
         new_doctor = Doctor(
